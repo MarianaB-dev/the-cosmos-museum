@@ -1,0 +1,51 @@
+.about-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 40px;
+}
+
+.about-header p {
+  color: #9aa5bd;
+  font-size: 1.1rem;
+}
+
+/* ----blocks with text-- */
+.about-content {
+  max-width: 650px;    
+  margin: 0 auto 32px;  /* center blocs horizontally */
+}
+
+.about-content h2 {
+  color: #3fd0c9;       
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.about-content p {
+  color: #e8ecf5;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.about-content strong {
+  color: #f2b84b;       
+}
+/* ----Style for photos------ */
+.about-img {
+  width: 100%;          
+  height: auto;         
+  border-radius: 8px;   
+  margin: 16px 0;       /* space on top and bottom from text */
+  border: 1px solid #2a3350; 
+}
+/* responsive design */
+@media (max-width: 480px) {
+  .about-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .about-content h2 {
+    font-size: 1.3rem;
+  }
+  
+}
