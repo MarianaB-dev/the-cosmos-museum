@@ -1,67 +1,63 @@
-let vardPlanet = "Mercury"; // sparar vilken planet som är vald just nu, Mercury är standard
+let vardPlanet = "Mercury"; 
+const knapp = document.querySelectorAll('.planet-btn');
+const vänster_bild = document.querySelector('#pl img'); 
+const manadval = document.getElementById('ms'); 
 
-const knapp = document.querySelectorAll('.planet-btn'); // hämtar alla planet-knappar (en lista med 7 st)
-const vänster_bild = document.querySelector('#pl img'); // hämtar den stora bilden till vänster
-const manadval = document.getElementById('ms'); // hämtar dropdown-menyn för månad
+knapp.forEach(function(button){ 
+    button.addEventListener('click', function(){ 
 
-knapp.forEach(function(button){ // går igenom varje knapp i listan, en i taget
-    button.addEventListener('click', function(){ // lägger till en klick-lyssnare på just den knappen
+        const klick = button.querySelector('img'); 
+        vänster_bild.src = klick.src; 
+        vänster_bild.alt = klick.alt; 
 
-        const klick = button.querySelector('img'); // hittar bilden inuti knappen som klickades
-        vänster_bild.src = klick.src; // byter ut den stora bilden mot den klickade planetens bild
-        vänster_bild.alt = klick.alt; // byter ut alt-texten också, så den matchar
+        vardPlanet = klick.alt; 
 
-        vardPlanet = klick.alt; // sparar namnet på planeten som klickades, t.ex. "Mars"
-
-        if (klick.alt === 'Saturn'){ // om planeten är Saturn...
-            vänster_bild.classList.add('saturn-img'); // ...lägg till en klass som visar ringarna korrekt
-        } else {
-            vänster_bild.classList.remove('saturn-img'); // annars ta bort klassen (om den satt kvar sen förut)
+        if (klick.alt === 'Saturn'){ 
+            vänster_bild.classList.add('saturn-img'); 
+            vänster_bild.classList.remove('saturn-img');
         }
 
-        loadDoc(klick.alt); // hämtar planet-informationen (text) från XML-filen
+        loadDoc(klick.alt); 
     });
 });
 
-manadval.addEventListener('change', function(){ // körs när användaren väljer en ny månad
+manadval.addEventListener('change', function(){ 
+    const manad = manadval.value; 
+    const bildpath = "images/planets/" + vardPlanet.toLowerCase() + manad + ".png"; 
 
-    const manad = manadval.value; // hämtar siffran för vald månad, t.ex. "3" för mars
-    const bildpath = "images/planets/" + vardPlanet.toLowerCase() + manad + ".png"; // bygger sökvägen till rätt bild
-
-    document.querySelector('#chosen-month img').src = bildpath; // byter bilden i #chosen-month
-    document.querySelector('#chosen-month img').alt = vardPlanet + " månad " + manad; // uppdaterar alt-texten
+    document.querySelector('#chosen-month img').src = bildpath; 
+    document.querySelector('#chosen-month img').alt = vardPlanet + " månad " + manad; 
 });
 
-function loadDoc(planetNamn) { // funktion som hämtar XML-filen från servern
+function loadDoc(planetNamn) { 
 
-    var xhttp = new XMLHttpRequest(); // skapar verktyget som hämtar filen
+    var xhttp = new XMLHttpRequest(); 
 
-    xhttp.onreadystatechange = function (){ // körs varje gång status på förfrågan ändras
-        if (xhttp.readyState === 4 && xhttp.status === 200){ // om filen är klar (4) och allt gick bra (200)
-            myFunction(this.responseXML, planetNamn); // skicka vidare XML-innehållet och planetnamnet
+    xhttp.onreadystatechange = function (){ 
+        if (xhttp.readyState === 4 && xhttp.status === 200){ 
+            myFunction(this.responseXML, planetNamn); 
         }
     };
 
-    xhttp.open("GET", "planeter.xml", true); // säger vilken fil som ska hämtas, asynkront
-    xhttp.send(); // skickar iväg förfrågan
+    xhttp.open("GET", "planeter.xml", true); 
+    xhttp.send(); 
 }
 
-function myFunction(xmlDoc, planetNamn) { // letar upp rätt planet i XML:et och visar infon
+function myFunction(xmlDoc, planetNamn) { 
 
-    var planets = xmlDoc.getElementsByTagName("planet"); // hämtar alla <planet>-taggar
+    var planets = xmlDoc.getElementsByTagName("planet"); 
 
-    for (let i = 0; i < planets.length; i++){ // går igenom varje planet i listan
+    for (let i = 0; i < planets.length; i++){ 
 
-        var name = planets[i].getElementsByTagName("name")[0].textContent; // hämtar namnet på aktuell planet
+        var name = planets[i].getElementsByTagName("name")[0].textContent;
+        if (name === planetNamn){ 
 
-        if (name === planetNamn){ // om namnet matchar planeten vi letar efter...
-
-            var p = planets[i].getElementsByTagName("p")[0].textContent; // hämtar beskrivningen
-            var distans = planets[i].getElementsByTagName("distans")[0].textContent; // hämtar distans
-            var diameter = planets[i].getElementsByTagName("diameter")[0].textContent; // hämtar diameter
-            var moon = planets[i].getElementsByTagName("moon")[0].textContent; // hämtar antal månar
-            var dayLength = planets[i].getElementsByTagName("dayLength")[0].textContent; // hämtar dygnslängd
-            var temp = planets[i].getElementsByTagName("temp")[0].textContent; // hämtar temperatur
+            var p = planets[i].getElementsByTagName("p")[0].textContent;
+            var distans = planets[i].getElementsByTagName("distans")[0].textContent; 
+            var diameter = planets[i].getElementsByTagName("diameter")[0].textContent; 
+            var moon = planets[i].getElementsByTagName("moon")[0].textContent; 
+            var dayLength = planets[i].getElementsByTagName("dayLength")[0].textContent; 
+            var temp = planets[i].getElementsByTagName("temp")[0].textContent; 
 
             document.getElementById("info").innerHTML = `
                 <h2> ${name}</h2>
@@ -76,26 +72,6 @@ function myFunction(xmlDoc, planetNamn) { // letar upp rätt planet i XML:et och
     }
 }
 
-vänster_bild.src = "images/space/mercury.jpg"; // sätter Mercury som standardbild direkt vid sidladdning
-vänster_bild.alt = "Mercury"; // sätter alt-texten för standardbilden
-loadDoc("Mercury"); // hämtar och visar Mercury-infon direkt, innan användaren klickat på något
-
-
-$(document).ready(function(){
-    $("#submit").click(function(){
-        var age = $("#ålder").val();
-        if (age == null || age.trim() === '' || isNaN(age) || age <= 0 || age > 100){
-            alert("Wrong");
-            return;
-        } else {
-            if (age > 18){
-                var vuxen_pris = 145;
-                $('#list').text(`The price for adults: ${vuxen_pris} kr`);
-            } else {
-                var barn_pris = 99;
-                $('#list').text(`The price for child: ${barn_pris} kr`);
-            }
-            $('#ålder').val('');
-        }
-    }); // stänger .click(function(){ ... })
-}); // stänger $(document).ready(function(){ ... })
+vänster_bild.src = "images/space/mercury.jpg"; 
+vänster_bild.alt = "Mercury"; 
+loadDoc("Mercury"); 

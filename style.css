@@ -5,6 +5,7 @@ body{
 }
 
 .navbar {
+    background-color: black;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -19,9 +20,18 @@ body{
 }
 
 .links a{
+    display: inline-block;
+    padding: 5px;
+    border-bottom: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
     color: aliceblue;
     text-decoration: none;
     font-size: 20px;
+}
+.links a:hover{
+    cursor: pointer;
+    transform: translateY(-3px);
+    border-bottom: 2px solid blue;
 }
 
 #read{
