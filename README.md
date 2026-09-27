@@ -6,10 +6,10 @@ It is a minimal interactive responsive front-end website that uses HTML, CSS, an
 
 ## 🏠 Homepage screenshots
 
-![Homepage screenshot 1](images\homepage_screenshots\home1.png)
-![Homepage screenshot 2](images\homepage_screenshots\home2.png)
-![Homepage screenshot 3](images\homepage_screenshots\home3.png)
-![Homepage screenshot 4](images\homepage_screenshots\home4.png)
+![Homepage screenshot 1](./images/homepage_screenshots/home1.png)
+![Homepage screenshot 2](./images/homepage_screenshots/home2.png)
+![Homepage screenshot 3](./images/homepage_screenshots/home3.png)
+![Homepage screenshot 4](./images/homepage_screenshots/home4.png)
 
 ## ✨ Features
 * Responsive layout for desktop and mobile devices.
