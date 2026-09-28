@@ -44,7 +44,7 @@ body{
 }
 
 .top {
-    background-image: url(images/space/background.jpg);
+    background-image: url(/images/space/background.jpg);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -304,7 +304,7 @@ footer {
 }
 
 .pris{
-    background-image: url(images/space/background3.jpg);
+    background-image: url(/images/space/background3.jpg);
     background-size: cover;
     background-position: center;
     position: relative;
